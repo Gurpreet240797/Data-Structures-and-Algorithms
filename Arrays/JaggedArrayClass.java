@@ -42,6 +42,54 @@ public class JaggedArrayClass {
         int[] temp = array[index1];
         array[index1] = array[index2];
         array[index2] = temp;
+        /*int[] temp = array[index1];
+        array[index1] = array[index2];
+        array[index2] = temp;*/
+    }
+
+    public void removeRow (int index) {
+        int [][] tempArr = new int[array.length - 1][];
+        int itr = 0;
+
+        for (int i=0; i< array.length; i++) {
+            if (index != i) {
+                int[] temp = array[i];
+                tempArr[itr++] = temp;
+            }
+        }
+        array = tempArr;
+    }
+
+    public void insertRow (String row, int index) {
+        String[] arr = row.split(" ");
+        int[] intArr = new int[arr.length];
+        int itr = 0;
+        for (int i=0; i<arr.length; i++) {
+            intArr[i] = Integer.parseInt(arr[i]);
+        }
+
+        int[][] tempArr = new int[array.length + 1][];
+
+        for (int i = 0; i < tempArr.length; i++) {
+            if (index == i) {
+                tempArr[i] = intArr;
+            } else {
+                tempArr[i] = array[itr++];
+            }
+        }
+
+        array = tempArr;
+    }
+
+    public void appendToAllRows (int value) {
+        for (int i=0; i<array.length; i++) {
+            int[] temp = new int[array[i].length + 1];
+            for (int j=0; j<array[i].length; j++) {
+                temp[j] = array[i][j];
+            }
+            temp[temp.length - 1] = value;
+            array[i] = temp;
+        }
     }
 
     public void display() {
