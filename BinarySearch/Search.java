@@ -2,8 +2,8 @@ package BinarySearch;
 
 public class Search {
     public static void main (String args[]) {
-        int[] nums = {1,2};
-        int target = 1;
+        int[] nums = {4,5,6,7,0,1,2};
+        int target = 0;
 
         int start = searchWrapper(nums, 0, nums.length-1, target);
 
