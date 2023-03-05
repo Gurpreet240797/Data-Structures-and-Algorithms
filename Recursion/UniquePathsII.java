@@ -10,7 +10,7 @@ public class UniquePathsII {
     }
 
     public static int wrapperUniquePaths(int m, int n, int[][] obstacle, int[][] dp) {
-        if (m == 1 && n == 1) return 1;
+        if (m == 1 && n == 1 && obstacle[m-1][n-1] != 1) return 1;
         if (m>0 && n>0 && obstacle[m-1][n-1] != 1 && dp[m][n] == 0) {
             dp[m][n] = wrapperUniquePaths(m-1, n, obstacle, dp) + wrapperUniquePaths(m, n-1, obstacle, dp);
         }
