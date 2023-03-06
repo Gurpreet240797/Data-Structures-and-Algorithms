@@ -3,8 +3,8 @@ package Recursion;
 public class TargetSum {
     static int count = 0;
     public static void main(String args[]) {
-        int target = 50;
-        int[] nums = {10, 20, 30, 40};
+        int target = 3;
+        int[] nums = {1, 1, 1, 1, 1};
         wrapperTargetSum(nums, target);
         System.out.println(count);
     }
