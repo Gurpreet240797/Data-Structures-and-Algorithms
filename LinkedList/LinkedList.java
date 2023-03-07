@@ -17,8 +17,34 @@ class IntList {
 
     private Node head;
 
+    // Default Constructor
     IntList() {
         head = null;
+    }
+
+    // Copy Constructor
+    IntList(IntList list1) {
+        if (list1.head == null) {
+            head = null;
+        } else {
+            // t1 for iterating over list1
+            Node t1 = list1.head;
+            Node t2;
+            Node t3 = null;
+
+            while (t1 != null) {
+                t2 = new Node(t1.value, null);
+                if (head == null) {
+                    head = t2;
+                    t3 = head;
+                } else {
+                    t3.next = t2;
+                    t3 = t2;
+                }
+                t1 = t1.next;
+            }
+            t2 = t3 = null;
+        }
     }
 
     public void addToStart(int val) {
@@ -143,11 +169,7 @@ public class LinkedList {
 
         myList.showListContents();
         System.out.println();
-        myList.replace(12, 1);
-        myList.replace(16, 2);
-        myList.replace(17, 3);
-
-        System.out.println();
-        myList.showListContents();
+        IntList myList2 = new IntList(myList);
+        myList2.showListContents();
     }
 }
