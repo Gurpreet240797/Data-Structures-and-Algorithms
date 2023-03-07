@@ -47,6 +47,11 @@ class IntList {
         }
     }
 
+    // clone method
+    public IntList clone() {
+        return new IntList(this);
+    }
+
     public void addToStart(int val) {
         head = new Node(val, head);
     }
@@ -169,7 +174,13 @@ public class LinkedList {
 
         myList.showListContents();
         System.out.println();
+
         IntList myList2 = new IntList(myList);
+        myList2.replace(17,20);
         myList2.showListContents();
+
+        System.out.println();
+        IntList response = myList2.clone();
+        response.showListContents();
     }
 }
