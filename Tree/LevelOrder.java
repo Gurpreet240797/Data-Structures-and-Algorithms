@@ -146,6 +146,25 @@ class BinaryTree {
             ll.removeFromStart();
         }
     }
+
+    public void diagonalPrint() {
+        if (root == null) {
+            return;
+        }
+
+        Node itr = root;
+
+        Node parent = itr;
+        while (parent != null) {
+            System.out.print(itr.value + " ");
+            if (itr.right != null) {
+                itr = itr.right;
+            } else {
+                itr = parent.left;
+                parent = itr;
+            }
+        }
+    }
 }
 
 public class LevelOrder {
@@ -158,12 +177,14 @@ public class LevelOrder {
         bst.addNode(5);
         bst.addNode(0);
 
-        bst.levelOrder();
-        System.out.println();
-        bst.levelSpiral();
+        bst.diagonalPrint();
+
+        //bst.levelOrder();
+        //System.out.println();
+        //bst.levelSpiral();
 
 
-        BinaryTree bst2 = new BinaryTree();
+        /*BinaryTree bst2 = new BinaryTree();
         bst2.addNode(4);
         bst2.addNode(3);
         bst2.addNode(2);
@@ -172,6 +193,6 @@ public class LevelOrder {
         System.out.println();
         bst2.levelOrder();
         System.out.println();
-        bst2.levelSpiral();
+        bst2.levelSpiral();*/
     }
 }
