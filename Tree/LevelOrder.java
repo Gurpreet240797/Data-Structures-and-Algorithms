@@ -165,19 +165,62 @@ class BinaryTree {
             }
         }
     }
+
+    public void boundaryPrint(Node itr) {
+        if (itr == null) return;
+
+        System.out.println(itr.value);
+        leaveNode(itr);
+        System.out.println();
+        leftNode(itr.left);
+        System.out.println();
+        rightNode(itr.right);
+    }
+
+    public void leftNode(Node itr) {
+        if (itr == null) return;
+        if (itr.left == null && itr.right == null) return;
+
+        leftNode(itr.left);
+        System.out.print(itr.value + " ");
+    }
+
+    public void rightNode(Node itr) {
+        if (itr == null) return;
+        if (itr.left == null && itr.right == null) return;
+
+        rightNode(itr.right);
+        System.out.print(itr.value + " ");
+    }
+
+    public void leaveNode(Node itr) {
+        if (itr == null) return;
+
+        leaveNode(itr.left);
+
+        if(itr.left == null && itr.right == null) {
+            System.out.print(itr.value + " ");
+        }
+
+        leaveNode(itr.right);
+    }
 }
 
 public class LevelOrder {
     public static void main (String args[]) throws Exception {
         BinaryTree bst = new BinaryTree();
+        //        4
+        //      1    5
+        //    0    2
+        //           3
         bst.addNode(4);
         bst.addNode(1);
         bst.addNode(2);
         bst.addNode(3);
         bst.addNode(5);
         bst.addNode(0);
-
-        bst.diagonalPrint();
+        bst.boundaryPrint(bst.root);
+        //bst.diagonalPrint();
 
         //bst.levelOrder();
         //System.out.println();
