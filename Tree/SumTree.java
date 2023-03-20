@@ -26,6 +26,7 @@ class Tree {
 public class SumTree {
     public static void main(String args[]) {
         Tree tree=new Tree();
+        // nnllnll, nlnll, nlnnlll
         tree.root=new Tree.Node(26);
         tree.root.left=new Tree.Node(10);
         tree.root.right=new Tree.Node(3);

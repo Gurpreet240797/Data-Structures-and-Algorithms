@@ -45,29 +45,45 @@ class Binary {
     }
 
     public int height(Node itr) {
-        if (itr == null) {
-            return 0;
-        }
+        if (itr == null) return 0;
+
         int left = height(itr.left);
         int right = height(itr.right);
 
-        if (left > right) {
-            return (left + 1);
-        } else {
-            return (right +1);
-        }
+        return Math.max(right, left) + 1;
+    }
+
+    public int depth(String preOrder, int index, int n) {
+        if (index  >= n || preOrder.charAt(index) == 'l') return 0;
+
+        index += 1;
+        int left = depth(preOrder, index, n);
+
+        index += 1;
+        int right = depth(preOrder, index, n);
+
+        return Math.max(right, left) + 1;
     }
 }
 
 public class HeightTree {
     public static void main (String args[]) throws Exception {
         Binary bst = new Binary();
+        //        4
+        //      1    5
+        //    0    2
+        //           3
         bst.addNode(4);
+        bst.addNode(1);
+        bst.addNode(2);
         bst.addNode(3);
         bst.addNode(5);
-        bst.addNode(1);
+        bst.addNode(0);
         int h = bst.height(bst.root) -1;
-        System.out.println("Height: " + h);
-        System.out.println("Depth: " + bst.height(bst.root));
+        System.out.println("Depth: " + h);
+        System.out.println("Height: " + bst.height(bst.root));
+        String preOrder = "nlnnlll";
+        int depth = bst.depth(preOrder, 0, preOrder.length());
+        System.out.println(depth);
     }
 }
