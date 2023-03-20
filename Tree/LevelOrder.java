@@ -122,5 +122,6 @@ public class LevelOrder {
         bst.levelOrder();
         System.out.println();
         System.out.println(bst.level-1);
+        System.out.println(bst.size);
     }
 }
