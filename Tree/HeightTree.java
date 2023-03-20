@@ -66,7 +66,8 @@ public class HeightTree {
         bst.addNode(3);
         bst.addNode(5);
         bst.addNode(1);
-
-        System.out.println(bst.height(bst.root));
+        int h = bst.height(bst.root) -1;
+        System.out.println("Height: " + h);
+        System.out.println("Depth: " + bst.height(bst.root));
     }
 }
