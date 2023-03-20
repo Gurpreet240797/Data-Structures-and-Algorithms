@@ -108,6 +108,44 @@ class BinaryTree {
             ll.removeFromStart();
         }
     }
+
+    public void levelSpiral() {
+        if (root == null) {
+            return;
+        }
+
+        Linked ll = new Linked();
+        Node itr = root;
+        ll.addToEnd(itr);
+
+        String goTo = "right";
+
+        while (ll.size != 0) {
+            itr = ll.head.value;
+            System.out.print(itr.value + " ");
+
+            if (goTo == "right") {
+                if (itr.right != null) {
+                    ll.addToEnd(itr.right);
+                }
+
+                if (itr.left != null) {
+                    ll.addToEnd(itr.left);
+                }
+                goTo = "left";
+            } else {
+                if (itr.left != null) {
+                    ll.addToEnd(itr.left);
+                }
+
+                if (itr.right != null) {
+                    ll.addToEnd(itr.right);
+                }
+                goTo = "right";
+            }
+            ll.removeFromStart();
+        }
+    }
 }
 
 public class LevelOrder {
@@ -118,10 +156,22 @@ public class LevelOrder {
         bst.addNode(2);
         bst.addNode(3);
         bst.addNode(5);
+        bst.addNode(0);
 
         bst.levelOrder();
         System.out.println();
-        System.out.println(bst.level-1);
-        System.out.println(bst.size);
+        bst.levelSpiral();
+
+
+        BinaryTree bst2 = new BinaryTree();
+        bst2.addNode(4);
+        bst2.addNode(3);
+        bst2.addNode(2);
+        bst2.addNode(1);
+
+        System.out.println();
+        bst2.levelOrder();
+        System.out.println();
+        bst2.levelSpiral();
     }
 }
