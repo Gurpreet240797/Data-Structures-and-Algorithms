@@ -19,11 +19,8 @@ class Heap {
     public void decreaseKey(int i) {
         int parent = (i - 1)/2;
         while (i != 0 && heapArr[i] < heapArr[parent]) {
-            int temp = heapArr[parent];
-            heapArr[parent] = heapArr[i];
-            heapArr[i] = temp;
-            i = parent;
-            parent = (i - 1)/2;
+            swap(i, parent);
+            decreaseKey(parent);
         }
     }
 
@@ -40,6 +37,42 @@ class Heap {
         decreaseKey(currentHeapSize);
         currentHeapSize += 1;
     }
+
+    public void removeKey() {
+        if (currentHeapSize == 0) {
+            return;
+        }
+
+        swap(0, currentHeapSize-1);
+        heapArr[currentHeapSize-1] = 0;
+        currentHeapSize -= 2;
+        increaseKey(0);
+    }
+
+    public void increaseKey(int i) {
+        int smallest = i;
+        int leftChild = (2*i) + 1;
+        int rightChild = (2*i) + 2;
+
+        if (i < currentHeapSize && heapArr[leftChild] < heapArr[smallest]) {
+            smallest = leftChild;
+        }
+
+        if (i < currentHeapSize && heapArr[rightChild] < heapArr[smallest]) {
+            smallest = rightChild;
+        }
+
+        if (smallest != i) {
+            swap(i, smallest);
+            increaseKey(smallest);
+        }
+    }
+
+    public void swap(int i, int parent) {
+        int temp = heapArr[parent];
+        heapArr[parent] = heapArr[i];
+        heapArr[i] = temp;
+    }
 }
 
 public class MinHeap {
@@ -53,5 +86,7 @@ public class MinHeap {
         minHeap.insertKey(1);
         minHeap.insertKey(8);
         minHeap.insertKey(3);
+        minHeap.removeKey();
+        System.out.println(minHeap.getMin());
     }
 }
