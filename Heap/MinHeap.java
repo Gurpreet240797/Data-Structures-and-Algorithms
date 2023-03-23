@@ -49,21 +49,21 @@ class Heap {
         increaseKey(0);
     }
 
-    public void increaseKey(int i) {
-        int smallest = i;
-        int leftChild = (2*i) + 1;
-        int rightChild = (2*i) + 2;
+    public void increaseKey(int parent) {
+        int smallest = parent;
+        int leftChild = (2*parent) + 1;
+        int rightChild = (2*parent) + 2;
 
-        if (i < currentHeapSize && heapArr[leftChild] < heapArr[smallest]) {
+        if (parent < currentHeapSize && heapArr[leftChild] < heapArr[smallest]) {
             smallest = leftChild;
         }
 
-        if (i < currentHeapSize && heapArr[rightChild] < heapArr[smallest]) {
+        if (parent < currentHeapSize && heapArr[rightChild] < heapArr[smallest]) {
             smallest = rightChild;
         }
 
-        if (smallest != i) {
-            swap(i, smallest);
+        if (smallest != parent) {
+            swap(parent, smallest);
             increaseKey(smallest);
         }
     }
