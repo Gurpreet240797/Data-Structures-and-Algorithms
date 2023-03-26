@@ -2,6 +2,7 @@ package Hashmap;
 
 // Using Separate Chaining Technique for avoiding hash collision
 
+import java.util.HashMap;
 import java.util.Objects;
 
 class MyHashMap<k, v> {
@@ -51,6 +52,8 @@ class MyHashMap<k, v> {
     }
 
     public v remove(k key) {
+        //
+
         int bucket = getBucketIndex(key);
         int hashcode = hashCode(key);
 
@@ -93,12 +96,30 @@ class MyHashMap<k, v> {
         }
 
         size += 1;
-        //Node<k, v> newNode =
+        Node<k, v> newNode = new Node<k, v>(key, value, hashcode);
+        head = bucketArr[bucket];
+        newNode.next = head;
+        bucketArr[bucket] = newNode;
+
+        if ((1 * size) / numBuckets >= 0.7) {
+            Node<k, v>[] temp = new Node[numBuckets*2];
+            size = 0;
+            for (int i=0; i<numBuckets; i++) {
+                bucketArr[i] = null;
+            }
+
+            for (Node<k,v> headNode : temp) {
+                while (headNode != null) {
+                    add(headNode.key, headNode.value);
+                    headNode = headNode.next;
+                }
+            }
+        }
     }
 }
 
 public class Hashmap {
     public static void main(String args[]) {
-
+        //https://www.geeksforgeeks.org/implementing-our-own-hash-table-with-separate-chaining-in-java/
     }
 }
