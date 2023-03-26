@@ -1,11 +1,99 @@
 package Hashmap;
 
 // Using Separate Chaining Technique for avoiding hash collision
-class HashMap {
-    private int arr;
 
-    public void add(int value) {
+import java.util.Objects;
 
+class MyHashMap<k, v> {
+    class Node<k, v> {
+        k key;
+        v value;
+        final int hashcode;
+        Node next;
+
+        Node(k key, v value, int hashcode) {
+            this.key = key;
+            this.value = value;
+            this.hashcode = hashcode;
+        }
+    }
+
+    private Node<k, v>[] bucketArr;
+    private int numBuckets;
+    private int size;
+
+    MyHashMap() {
+        numBuckets = 10;
+        size = 0;
+        bucketArr = new Node[numBuckets];
+        for (int i=0; i<numBuckets; i++) {
+            bucketArr[i] = null;
+        }
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    private int hashCode(k key) {
+        return Objects.hashCode(key);
+    }
+
+    public int getBucketIndex(k key) {
+        int hashcode = hashCode(key);
+        int index = hashcode % numBuckets;
+        index = index < 0 ? index * -1 : index;
+        return index;
+    }
+
+    public v remove(k key) {
+        int bucket = getBucketIndex(key);
+        int hashcode = hashCode(key);
+
+        Node<k, v> head = bucketArr[bucket];
+        Node<k, v> prev = null;
+
+        if (head == null) {
+            return null;
+        }
+
+        while(head != null) {
+            if (head.key.equals(key) && hashcode == head.hashcode) {
+                break;
+            }
+            prev = head;
+            head = head.next;
+        }
+
+        v response = null;
+        response = head.value;
+        if (prev != null) {
+            prev.next = head.next;
+        } else {
+            bucketArr[bucket] = head.next;
+        }
+        size -= 1;
+        return response;
+    }
+
+    public void add(k key, v value) {
+        int bucket = getBucketIndex(key);
+        int hashcode = hashCode(key);
+        Node<k, v> head = bucketArr[bucket];
+
+        while (head != null) {
+            if (head.key.equals(key) && hashcode == head.hashcode) {
+                head.value = value;
+            }
+            head = head.next;
+        }
+
+        size += 1;
+        //Node<k, v> newNode =
     }
 }
 
