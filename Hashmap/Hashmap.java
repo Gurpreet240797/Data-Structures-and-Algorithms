@@ -1,6 +1,8 @@
 package Hashmap;
 
 // Using Separate Chaining Technique for avoiding hash collision
+// methods - add, remove, get, size, isEmpty
+// helper- getBucketIndex, hashcode
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -52,7 +54,10 @@ class MyHashMap<k, v> {
     }
 
     public v remove(k key) {
-        //
+        // For the key find the bucket and hashcode for the key
+        // Then have two pointers for traveling.
+        // Stop the while loop until you find the value and hashcode
+        // check for base cases for head null or prev null
 
         int bucket = getBucketIndex(key);
         int hashcode = hashCode(key);
@@ -83,7 +88,30 @@ class MyHashMap<k, v> {
         return response;
     }
 
+    public v get(k key) {
+        int bucket = getBucketIndex(key);
+        int hashcode = hashCode(key);
+
+        Node<k, v> head = bucketArr[bucket];
+
+        while (head != null) {
+            if (head.key.equals(key) && hashcode == hashCode(key) ) {
+                return head.value;
+            }
+            head = head.next;
+        }
+        return null;
+    }
+
     public void add(k key, v value) {
+        // Find the bucket and hashcode for the key to add
+        // make a head node that points to the bucket
+        // if the key is present in the bucket list replace the value
+        // otherwise increase the size and make a new node
+        // point head to bucket and new node next to head
+        // check for load factor (1 * size) / numBucket
+        // if more than 0.7 the make new bucket and put the values
+
         int bucket = getBucketIndex(key);
         int hashcode = hashCode(key);
         Node<k, v> head = bucketArr[bucket];
