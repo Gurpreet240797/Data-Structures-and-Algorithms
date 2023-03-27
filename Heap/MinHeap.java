@@ -54,11 +54,11 @@ class Heap {
         int leftChild = (2*parent) + 1;
         int rightChild = (2*parent) + 2;
 
-        if (parent < currentHeapSize && heapArr[leftChild] < heapArr[smallest]) {
+        if (leftChild < currentHeapSize && heapArr[leftChild] < heapArr[smallest]) {
             smallest = leftChild;
         }
 
-        if (parent < currentHeapSize && heapArr[rightChild] < heapArr[smallest]) {
+        if (rightChild < currentHeapSize && heapArr[rightChild] < heapArr[smallest]) {
             smallest = rightChild;
         }
 
