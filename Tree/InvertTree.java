@@ -1,9 +1,9 @@
 package Tree;
 
-class BST {
+class TreeBuild {
     class Node {
-        private int value;
-        private Node left, right;
+        int value;
+        Node left, right;
 
         Node () {this(0);}
 
@@ -43,45 +43,35 @@ class BST {
         }
     }
 
-    public void preOrder(Node itr) {
-        if (itr != null) {
-            System.out.print(itr.value + " ");
-            preOrder(itr.left);
-            preOrder(itr.right);
-        }
+    public void preOrder(Node root) {
+        if (root == null) return;
+
+        System.out.print(root.value + " ");
+        preOrder(root.left);
+        preOrder(root.right);
     }
 
-    public void postOrder(Node itr) {
-        if (itr != null) {
-            preOrder(itr.left);
-            preOrder(itr.right);
-            System.out.print(itr.value + " ");
-        }
-    }
+    public Node invert(Node root) {
+        if (root == null) return null;
 
-    public void inOrder(Node itr) {
-        if (itr != null) {
-            preOrder(itr.left);
-            System.out.print(itr.value + " ");
-            preOrder(itr.right);
-        }
+        Node newNode = new Node(root.value);
+        newNode.left = invert(root.right);
+        newNode.right = invert(root.left);
+
+        return newNode;
     }
 }
-
-public class BinaryTreeImplementation {
-    public static void main (String args[]) {
-        BST bst = new BST();
+public class InvertTree {
+    public static void main(String[] args) {
+        TreeBuild bst = new TreeBuild();
         bst.addNode(4);
         bst.addNode(2);
         bst.addNode(7);
         bst.addNode(1);
         bst.addNode(3);
         bst.addNode(6);
-
-        bst.inOrder(bst.root);
-        System.out.println();
-        bst.preOrder(bst.root);
-        System.out.println();
-        bst.postOrder(bst.root);
+        bst.addNode(9);
+        TreeBuild.Node node = bst.invert(bst.root);
+        bst.preOrder(node);
     }
 }
