@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class MergeSort {
     public static void main(String[] args) {
+        // https://www.freecodecamp.org/news/merge-sort-algorithm-python-and-java-examples-with-time-complexity/
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] arr = new int[n];
@@ -26,7 +27,6 @@ public class MergeSort {
         int[] right = new int[arrLength - mid];
 
         for (int i = 0; i < mid; i++) left[i] = arr[i];
-
         for (int i = mid; i < arrLength; i++) right[i - mid] = arr[i];
 
         mergeSort(left);
@@ -37,11 +37,9 @@ public class MergeSort {
     public static void merge(int[] arr, int[] left, int[] right) {
         int leftLength = left.length;
         int rightLength = right.length;
-
         int x = 0;
         int y = 0;
         int z = 0;
-
 
         while (x < leftLength && y < rightLength) {
             if (left[x] <= right[y]) arr[z++] = left[x++];
