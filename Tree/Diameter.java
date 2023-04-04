@@ -1,5 +1,6 @@
 package Tree;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 class MyQueue {
@@ -36,6 +37,10 @@ class MyQueue {
         head = head.next;
         size -= 1;
         return temp.value;
+    }
+
+    public int size() {
+        return size;
     }
 
     public boolean isEmpty() {
@@ -98,15 +103,21 @@ class TreeNodes {
           queue.enqueue(itr);
 
           while (!queue.isEmpty()) {
-              itr = queue.dequeue();
-              System.out.print(itr.data + " ");
-              if (itr.left != null) {
-                  queue.enqueue(itr.left);
-              }
+              int level = queue.size();
+              int[] arr = new int[level];
 
-              if (itr.right != null) {
-                  queue.enqueue(itr.right);
+              for (int i=0; i<level; i++) {
+                  itr = queue.dequeue();
+                  arr[i] = itr.data;
+                  if (itr.left != null) {
+                      queue.enqueue(itr.left);
+                  }
+
+                  if (itr.right != null) {
+                      queue.enqueue(itr.right);
+                  }
               }
+              System.out.println(Arrays.toString(arr));
           }
 
       }
